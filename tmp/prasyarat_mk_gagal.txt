@@ -1,0 +1,4 @@
+Daftar Mahasiswa Yang Tidak Memenuhi Syarat
+MK: MKD2101|Nama: AGAMA|SKS: 2
+2010201008|Nila|Prasyarat  tidak terpenuhi. 
+2010201008|Nila|Prasyarat  tidak terpenuhi. 
