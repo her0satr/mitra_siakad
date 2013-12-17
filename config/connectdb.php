@@ -9,6 +9,3 @@
 
   $con = _connect($db_hostname, $db_username, $db_password);
   $db  = _select_db($db_name, $con);
-
-?>
-

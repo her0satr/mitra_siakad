@@ -26,6 +26,7 @@ class dwolister {
   var $maxpages = 10;
 
   function BuatHalaman($mulai, $selesai) {
+	$a = '';
     for ($i = $mulai; $i <= $selesai; $i++) {
       $tmp = ($i == $this->page)? $this->pageactive : $this->pages;
       $tmp = $this->BuatHalaman1($i, $tmp);
@@ -47,7 +48,7 @@ class dwolister {
 
     $a = '';
     if ($this->page <= 0) $this->page = 1;
-    if ($this->page > $maxpages) {
+    if ($this->page > $this->maxpages) {
       // Awal
       if ($this->page-3 > 1) $a .= $this->BuatHalaman1(1, $this->pages) . $this->pageseparator;
       if ($this->page-3 > 3) $a .= "...". $this->pageseparator;

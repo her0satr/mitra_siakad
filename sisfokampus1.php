@@ -1,17 +1,14 @@
 <?php
 // Author: SIAKAD TEAM
 // 25 May 2006
-// Kenaikan Yesus Kristus ke Surga
-// Damai dan sejahtera beserta kita semua
-
+	include_once "../dwo.lib.php";
+	include_once "../db.mysql.php";
+	include_once "../connectdb.php";
+	
 function HeaderSisfoKampus($title='', $use_facebox=0) {
-  include_once "../dwo.lib.php";
-  include_once "../db.mysql.php";
-  include_once "../connectdb.php";
-  include_once "../parameter.php";
-  include_once "../cekparam.php";
-
- 
+	include_once "../parameter.php";
+	include_once "../cekparam.php";
+	
   echo "<HTML xmlns=\"http://www.w3.org/1999/xhtml\">
   <HEAD><TITLE>$title</TITLE>
   <META content=\"SIAKAD TEAM\" name=\"author\">

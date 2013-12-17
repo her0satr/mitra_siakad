@@ -8,7 +8,7 @@ $gelombang = GetaField('pmbperiod', "KodeID='".KodeID."' and NA", 'N', "PMBPerio
 $_apliNama = GetSetVar('_apliNama');
 $_apliPage = GetSetVar('_apliPage');
 $_curPres = GetSetVar('_curPres');
-if ($_REQUEST['sbmt'] == 1) {
+if (isset($_REQUEST['sbmt']) && $_REQUEST['sbmt'] == 1) {
   $_SESSION['_apliPre'] = ($_REQUEST['_apliPre'] == 'Y')? 'Y' : 'N';
   $_SESSION['_apliGel'] = ($_REQUEST['_apliGel'] == 'Y')? 'Y' : 'N';
 }
@@ -27,8 +27,8 @@ else {
 
 // *** Functions ***
 function TampilkanHeaderAplikan($gelombang) {
-  $ck = ($_SESSION['_apliPre'] == 'Y')? 'checked' : '';
-  $ckgel = ($_SESSION['_apliGel'] == 'Y')? 'checked' : '';
+  $ck = (isset($_SESSION['_apliPre']) && $_SESSION['_apliPre'] == 'Y')? 'checked' : '';
+  $ckgel = (isset($_SESSION['_apliGel']) && $_SESSION['_apliGel'] == 'Y')? 'checked' : '';
   $optpresenter = GetOption2('presenter', "concat(PresenterID, ' - ', Nama)", 'PresenterID', $_SESSION['_curPres'], "KodeID='".KodeID."'", 'PresenterID');
   RandomStringScript();
   
@@ -131,8 +131,8 @@ function DftrAplikan($gelombang) {
   // Filter formulir
   $whr = array();
   if (!empty($_SESSION['_apliNama'])) $whr[] = "a.Nama like '$_SESSION[_apliNama]%' ";
-  if ($_SESSION['_apliPre'] == 'Y')   $whr[] = "a.LoginBuat = '$_SESSION[_Login]' ";
-  if ($_SESSION['_apliGel'] == 'Y')   $whr[] = "a.PMBPeriodID = '$gelombang' ";
+  if (isset($_SESSION['_apliPre']) && $_SESSION['_apliPre'] == 'Y')   $whr[] = "a.LoginBuat = '$_SESSION[_Login]' ";
+  if (isset($_SESSION['_apliGel']) && $_SESSION['_apliGel'] == 'Y')   $whr[] = "a.PMBPeriodID = '$gelombang' ";
   if (!empty($_SESSION['_curPres'])) $whr[] = "a.PresenterID = '$_SESSION[_curPres]' ";
   
   $_whr = implode(' and ', $whr);

@@ -2,8 +2,8 @@
 <?php
 function GetUserModule(){
     global $strCantQuery;
-    $_LevelID = $_SESSION['_LevelID'];
-    $_LoginID = $_SESSION['_LoginID'];
+    $_LevelID = (isset($_SESSION['_LevelID'])) ? $_SESSION['_LevelID'] : '';
+    $_LoginID = (isset($_SESSION['_LoginID'])) ? $_SESSION['_LoginID'] : '';
     $_arr = array();
     $strLevelID = '.'.$_LevelID.'.';
     $_sql = "select mg.MdlGrpID as GM

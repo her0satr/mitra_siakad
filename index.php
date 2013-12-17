@@ -20,7 +20,7 @@
 		$s2 = "insert into session (sessionId,user,address,sessionTime) values ('".$_SESSION['_Session']."', '".$_SESSION['_Login']."', '".$_SERVER['REMOTE_ADDR']."', '".time()."')";
 		$q2 = _query($s2);
 	} else {
-		$s2 = "update session set sessionTime = '".time()."' where sessionId = '".$w[sessionId]."'";
+		$s2 = "update session set sessionTime = '".time()."' where sessionId = '".$w['sessionId']."'";
 		$q2 = _query($s2);	
 	}
 	
