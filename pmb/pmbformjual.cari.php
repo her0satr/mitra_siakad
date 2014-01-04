@@ -29,7 +29,7 @@ function CariNama()
 	
 	if(empty($_REQUEST['PFJ_TGL_y']))
 	{	$temptahun = date('Y')-19;
-		$opttanggal = GetDateOption("$temptahun-$_REQUEST[PFJ_TGL_m]-$_REQUEST[PFJ_TGL_d]", 'PFJ_TGL');	}
+		$opttanggal = GetDateOption("$temptahun-".@$_REQUEST['PFJ_TGL_m']."-".@$_REQUEST['PFJ_TGL_d'], 'PFJ_TGL');	}
 	else
 	{	$opttanggal = GetDateOption("$_REQUEST[PFJ_TGL_y]-$_REQUEST[PFJ_TGL_m]-$_REQUEST[PFJ_TGL_d]", 'PFJ_TGL'); 	}
 	echo "<p><table class=box cellspacing=1 align=center>
@@ -60,7 +60,7 @@ function CariNama()
 			<td class=ul1 colspan=8><sub>Nama Filter Aktif: $_REQUEST[n]</sub></td>
 		  </tr>
 		  <tr>
-			<td class=ul1 colspan=8><sub>Tanggal Filter Aktif: $_REQUEST[PFJ_TGL_y]-$_REQUEST[PFJ_TGL_m]-$_REQUEST[PFJ_TGL_d]<sub></td>
+			<td class=ul1 colspan=8><sub>Tanggal Filter Aktif: ".@$_REQUEST['PFJ_TGL_y']."-".@$_REQUEST['PFJ_TGL_m']."-".@$_REQUEST['PFJ_TGL_d']."<sub></td>
 		  </tr>";
 	
 	echo "<tr>
@@ -76,11 +76,11 @@ function CariNama()
 			<th class=ttl width=20>Status</th>
 		</tr>";
 	while($w=_fetch_array($r))
-	{	$FormulirID = GetAField('pmbformjual', "PMBPeriodID='$gelombang' and AplikanID", $w[AplikanID], 'PMBFormJualID');
+	{	$FormulirID = GetAField('pmbformjual', "PMBPeriodID='$gelombang' and AplikanID", $w['AplikanID'], 'PMBFormJualID');
 		//if($w['PMBID']=='' or !isset($w['PMBID']) )
 		if(empty($FormulirID) or $FormulirID == '')
 		{	echo "<tr>
-				<td class=ul1><input type=checkbox name='pilihan[]' value='$w[AplikanID]' 
+				<td class=ul1><input type=checkbox name='pilihan[]' value='".$w['AplikanID']."' 
 					onChange='this.form.submit()' /></td>
 				";
 			$Status = "";
@@ -92,7 +92,7 @@ function CariNama()
 				";
 			$Status = "SUDAH MEMBELI";
 		}
-		echo "	<td class=ul1 align=center>$w[AplikanID]</td>
+		echo "	<td class=ul1 align=center>".$w['AplikanID']."</td>
 				<td class=ul1>$w[Nama]</td>
 				<td class=ul1 align=center>$w[Kelamin]</td>
 				<td class=ul1 align=center>$w[TempatLahir]</td>

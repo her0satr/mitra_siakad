@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 
 // *** Parameters ***
 
@@ -19,7 +19,7 @@ $oke = BolehAksesData($_SESSION['_Login']);
   if ($oke) {
     $gel = GetaField('pmbperiod', "KodeID='".KodeID."' and NA", 'N', "PMBPeriodID");
 	
-	$gos = sqling($_REQUEST['gos']);
+	$gos = sqling(@$_REQUEST['gos']);
     if (empty($gos)) {
       Main($gel, $AplikanID);
     }
@@ -145,7 +145,7 @@ ESD;
   // Parameters
   $NamaSekolah = GetaField('asalsekolah', 'SekolahID', $w['AsalSekolah'], "concat(Nama, ', ', Kota)");
   $optkelamin = GetRadio("select Kelamin, Nama, concat(Kelamin, ' - ', Nama) as _kel from kelamin where NA='N'",
-    'Kelamin', "_kel", 'Kelamin', $w[Kelamin], ', ');
+    'Kelamin', "_kel", 'Kelamin', $w['Kelamin'], ', ');
   $TanggalLahir = GetDateOption($w['TanggalLahir'], 'TGL');
   $TanggalDaftar = GetDateOption($w['TanggalEdit'], 'TGLBuat');
   $optagama = GetOption2('agama', "concat(Agama, ' - ', Nama)", 'Agama', $w['Agama'], '', 'Agama');
@@ -312,7 +312,9 @@ ESD;
 			  </tr>";
 	
   }
-
+	
+	$Institusi = (isset($Institusi)) ? $Institusi : '';
+	
   echo <<<ESD
   <tr><td class=inp>Program : </td>
 	  <td class=ul1><select name='Program'>$PilihanProgram</select></td>

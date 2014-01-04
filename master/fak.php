@@ -129,7 +129,7 @@ function DftrProdi() {
     $r = _query($s);
     $fak = GetFields('fakultas', 'FakultasID', $_SESSION['fid'], '*');
     $a = "<p><table class=box cellspacing=1 cellpadding=4 width=600>
-      <tr><td>$fak[FakultasID]</td><td colspan=4><b>$fak[Nama]</td></tr>
+      <tr><td>".@$fak['FakultasID']."</td><td colspan=4><b>".@$fak['Nama']."</td></tr>
       <tr><th colspan=2 class=ttl>Kode</th>
       <th class=ttl>Program Studi</th>
       <th class=ttl>Jenjang</th>
