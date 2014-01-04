@@ -31,8 +31,8 @@ echo '
   $q2 = _query($s2);
   $w2 = (_fetch_array($q2));
 
-$start = $w2[_fromyear].",".($w2[_frommonth]).",".$w2[_fromday];
-$end = $w2[_toyear].','.($w2[_tomonth]).','.$w2[_today];
+$start = $w2['_fromyear'].",".($w2['_frommonth']).",".$w2['_fromday'];
+$end = $w2['_toyear'].','.($w2['_tomonth']).','.$w2['_today'];
 
 echo "
 <script>
@@ -147,7 +147,7 @@ function Edit($md, $prd, $id) {
   $curKampus = '';
   $counting = 0;
   $counting3 = 0;
-  $ruangarray = explode(",",$w['RuangID']); 
+  $ruangarray = explode(",",@$w['RuangID']); 
   while($w1=_fetch_array($r1))
   {	 	if(empty($cur_kampus)) 
 		{ 	$cur_kampus = $w1['NamaKampus']; 
@@ -183,7 +183,7 @@ function Edit($md, $prd, $id) {
   $TanggalUjian = GetDateOption($w['TanggalUjian'], 'TanggalUjian');
   $JamMulai = GetTimeOption($w['JamMulai'], 'JamMulai');
   $JamSelesai = GetTimeOption($w['JamSelesai'], 'JamSelesai');
-  $optusm = GetOption2('pmbusm', "concat(PMBUSMID, ' - ', Nama)", 'PMBUSMID', $w['PMBUSMID'], "KodeID='".KodeID."'", 'PMBUSMID');
+  $optusm = GetOption2('pmbusm', "concat(PMBUSMID, ' - ', Nama)", 'PMBUSMID', @$w['PMBUSMID'], "KodeID='".KodeID."'", 'PMBUSMID');
   
   $s2 = "select date_format(UjianMulai, '%d')+0 as _fromday, date_format(UjianMulai, '%m')+0 as _frommonth, date_format(UjianMulai, '%Y')+0 as _fromyear,
   		date_format(UjianSelesai, '%d')+0 as _today, date_format(UjianSelesai, '%m')+0 as _tomonth, date_format(UjianSelesai, '%Y')+0 as _toyear, PMBPeriodID
@@ -196,12 +196,12 @@ function Edit($md, $prd, $id) {
 	$s3 = "select PMBPeriodID from pmbperiod order by PMBPeriodID desc";
 	$q3 = _query($s3);
 	while ($w3 = _fetch_array($q3)){
-		if ($w[PMBPeriodID] == $w3[PMBPeriodID]){
+		if (@$w['PMBPeriodID'] == @$w3['PMBPeriodID']){
 			$sel = "selected='selected'";
 		} else {
 			$sel = "";
 		}
-		$optgelombang .= "<option value='".$w3[PMBPeriodID]."' ".$sel.">".$w3[PMBPeriodID]."</option>";
+		$optgelombang .= "<option value='".@$w3['PMBPeriodID']."' ".$sel.">".@$w3['PMBPeriodID']."</option>";
 	}
   //////////////////////
 

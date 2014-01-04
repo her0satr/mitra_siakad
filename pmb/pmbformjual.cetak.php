@@ -109,7 +109,7 @@ function Isinya($pmbformulir, $p) {
   $n = 0; $nr = 0;
   foreach($arrBaris as $baris)
   { 
-	$type = $baris[0];
+	$type = @$baris[0];
 	if($type=='R')
 	{	$style='B';
 		$Kolom1x = $Kolom1;
@@ -132,21 +132,24 @@ function Isinya($pmbformulir, $p) {
 	$p->SetFont('Helvetica', $style, $lettersize);
     
 	// Print kolom 1
-	$p->Cell($Kolom1x, $t, $numbering.' '.$baris[1], 0, 0);
+	$p->Cell($Kolom1x, $t, $numbering.' '.@$baris[1], 0, 0);
 	
 	// Print kolom 2
-	$p->Cell($Kolom2, $t, $baris[2], 0, 0);
+	$p->Cell($Kolom2, $t, @$baris[2], 0, 0);
     
-	$arrLines = array();
 	// Print kolom 3
-	if($baris[3] == '=LINES=') $arrLines[] = array($p->GetX(), $Kolom3);
-	else if(strpos($baris[3], '=LINES=')>0) 
-	{	$stringwidth = $p->GetStringWidth(TRIM(str_replace('=LINES=', '', $baris[3])));
+	$arrLines = array();
+	$baris[3] = (isset($baris[3])) ? $baris[3] : '';
+	if ($baris[3] == '=LINES=') {
+		$arrLines[] = array($p->GetX(), $Kolom3);
+	} else if(strpos($baris[3], '=LINES=')>0) {
+		$stringwidth = $p->GetStringWidth(TRIM(str_replace('=LINES=', '', $baris[3])));
 		$arrLines[] = array($p->GetX()+$stringwidth, $Kolom3-$stringwidth);
 	}
 	$p->Cell($Kolom3, $t, str_replace('=LINES=', '', $baris[3]), 0, 0);
 	
 	// Print kolom 4
+	$baris[4] = (isset($baris[4])) ? $baris[4] : '';
 	if(TRIM($baris[4]) == '=LINES=') $arrLines[] = array($p->GetX(), $Kolom4);
 	else if(strpos($baris[4], '=LINES=')>0) 
 	{	$stringwidth = $p->GetStringWidth(TRIM(str_replace('=LINES=', '', $baris[4])));
@@ -154,6 +157,7 @@ function Isinya($pmbformulir, $p) {
 	}
 	$p->Cell($Kolom4, $t, TRIM(str_replace('=LINES=', '', $baris[4])), 0, 0);
 	
+	$baris[5] = (isset($baris[5])) ? $baris[5] : '';
 	if(TRIM($baris[5]) == '=LINES=') $arrLines[] = array($p->GetX(), $Kolom5);
 	else if(strpos($baris[5], '=LINES=')>0) 
 	{	$stringwidth = $p->GetStringWidth(TRIM(str_replace('=LINES=', '', $baris[5])));
@@ -234,7 +238,7 @@ function HeaderLogo($jdl, $p, $orientation='P')
 	$p->Image($logo, 12, 8, 18);
 	$p->SetY(5);
     $p->SetFont("Helvetica", '', 8);
-    $p->Cell($pjg, 5, $identitas['Yayasan'], 0, 1, 'C');
+    $p->Cell($pjg, 5, @$identitas['Yayasan'], 0, 1, 'C');
     $p->SetFont("Helvetica", 'B', 10);
     $p->Cell($pjg, 7, $identitas['Nama'], 0, 0, 'C');
     

@@ -53,7 +53,7 @@ function Edit($md, $prd, $id) {
   $gelombang = GetaField('pmbperiod', "KodeID='".KodeID."' and NA", 'N', "PMBPeriodID");
   $jml = GetaField('pmb', "PMBPeriodID='$gelombang' and Pilihan1", $_SESSION['prodi'], "count(PMBID)");
   
-  $ruangopt = GetOption2('ruang', 'RuangID', 'RuangID', $w['RuangID'], "KodeID='".KodeID."'", 'RuangID');
+  $ruangopt = GetOption2('ruang', 'RuangID', 'RuangID', @$w['RuangID'], "KodeID='".KodeID."'", 'RuangID');
   $Tanggal = GetDateOption($w['Tanggal'], 'Tanggal');
   $JamMulai = GetTimeOption($w['JamMulai'], 'JamMulai');
   $JamSelesai = GetTimeOption($w['JamSelesai'], 'JamSelesai');
@@ -132,8 +132,8 @@ function Edit($md, $prd, $id) {
 
 function Simpan($md, $prd, $id) {
   TutupScript();
-  $Urutan = $_REQUEST['Urutan']+0;
-  $PMBUSMID = sqling($_REQUEST['PMBUSMID']);
+  $Urutan = @$_REQUEST['Urutan']+0;
+  $PMBUSMID = sqling(@$_REQUEST['PMBUSMID']);
   $Tanggal = "$_REQUEST[Tanggal_y]-$_REQUEST[Tanggal_m]-$_REQUEST[Tanggal_d]";
   $JamMulai = "$_REQUEST[JamMulai_h]:$_REQUEST[JamMulai_n]";
   $JamSelesai = "$_REQUEST[JamSelesai_h]:$_REQUEST[JamSelesai_n]";
@@ -238,7 +238,7 @@ function CekTanggal($w, $id, $prd)
 }
 
 function CekRuang($w, $id, $prd, $md)
-{	$ruangcheck = '';
+{	$a = $ruangcheck = '';
 	$arrRuang = array($w['RuangID']);
 	foreach($arrRuang as $ruang)
 		$ruangcheck .= (empty($ruangcheck))? "INSTR(concat(',', pu.RuangID, ','), concat(',', '$ruang', ',')) != 0" :

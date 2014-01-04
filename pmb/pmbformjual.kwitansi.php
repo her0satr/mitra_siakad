@@ -53,7 +53,7 @@ $p->Image("../img/kwitansi.jpg", 8, $Y+8, 190);
 if($Y!=0) $p->SetY($Y+10);
 $p->SetFont('Helvetica', 'B', 14);
 $p->Cell(30);
-$p->Cell($lbr, 9, "", 0, 1, 'C');
+$p->Cell(@$lbr, 9, "", 0, 1, 'C');
 
 BuatIsinya($kwi, $gels, $p);
 BuatFooter($kwi, $gels, $p);
@@ -108,7 +108,7 @@ function BuatIsinya($kwi, $gels, $p) {
   $p->Cell($k, $t, 'Pembelian formulir PMB  ' . $gels['Nama'], 0, 1);
   
   // Baris 5 - Program Studi
-
+	$nilai = '';
   $arr = explode(',', $kwi['ProdiID']);
   foreach($arr as $isi){
   $NamaProdi = GetaField('prodi', 'ProdiID', $isi, 'Nama');

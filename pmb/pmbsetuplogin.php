@@ -166,7 +166,7 @@ function EditEntry($gel)
   </tr>
   <tr>
       <td class=inp>Nama Peserta:</td>
-      <td class=ul1><input type=text name='Nama' value='$aplikan[Nama]' size=20 maxlength=50></td>
+      <td class=ul1><input type=text name='Nama' value='".@$aplikan['Nama']."' size=20 maxlength=50></td>
   </tr>
   <tr>
       <td class=inp>Tanggal Lahir:</td>

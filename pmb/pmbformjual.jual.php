@@ -10,9 +10,9 @@ HeaderSisfoKampus("Formulir");
 
 // *** Parameters ***
 $gel = sqling($_REQUEST['gel']);
-$id = $_REQUEST['id']+0;
-$tn = $_REQUEST['tn'];
-$tnpmb = $_REQUEST['tnpmb'];
+$id = @$_REQUEST['id']+0;
+$tn = @$_REQUEST['tn'];
+$tnpmb = @$_REQUEST['tnpmb'];
 // *** Main ***
 $gos = (empty($_REQUEST['gos']))? 'Jualan' : $_REQUEST['gos'];
 $gos($gel, $id, $tn, $tnpmb);
@@ -126,6 +126,8 @@ function Jualan($gel, $id, $tn) {
   if(!empty($arrSyarat)) $Syarat = '&bull; '.implode('<br>&bull; ', $arrSyarat);
   if(!empty($arrSyarat2)) $Syarat2 = implode('<br>', $arrSyarat2);
   
+  $Syarat2 = (isset($Syarat2)) ? $Syarat2 : '';
+  
   // Tampilkan formulir
   echo "<table class=bsc cellspacing=1 width=100%>
   <form action='../$_SESSION[mnux].jual.php' method=POST onSubmit=\"return CheckForm(this)\">
@@ -206,7 +208,7 @@ function Simpan($gel, $id, $tn) {
   $ProdiID = $_REQUEST['ProdiID'];
   $Nama = sqling($_REQUEST['Nama']);
   $Keterangan = sqling($_REQUEST['Keterangan']);
-  $CekSyarat = $_REQUEST['CekSyarat'];
+  $CekSyarat = @$_REQUEST['CekSyarat'];
  
   // Cek prasyarat pembelian formulir
   $MsgList = array();

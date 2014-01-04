@@ -20,6 +20,7 @@ else {
 
 // *** Functions ***
 function DftrPenjualan($g) {
+	$tot = 0;
   JualFormulirScript();
   $s = "select f.PMBFormulirID, f.Nama, f.JumlahPilihan, format(f.Harga, 0) as HRG,
     (select count(PMBFormJualID) 
